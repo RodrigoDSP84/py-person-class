@@ -7,12 +7,14 @@ class Person:
         Person.people[name] = self
 
 
-def create_person_list(people_data: list) -> None:
+def create_person_list(people_data: list[dict]) -> list[Person]:
+    # First pass: create all Person instances without wife/husband links
     for person_data in people_data:
         name = person_data["name"]
         age = person_data["age"]
         Person(name, age)
 
+    # Second pass: set wife or husband attributes if they are not None
     for person_data in people_data:
         name = person_data["name"]
         person_instance = Person.people[name]
